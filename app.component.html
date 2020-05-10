@@ -1,0 +1,108 @@
+<style>
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    background-color: gray;
+    padding: 15px
+  }
+
+  .flex-cont {
+    display: flex;
+  }
+
+  .flex-cont .boxx {
+    width: 70%;
+    height: 100%;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .box_img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .box_img_div {
+    background-color: #f1f1f1;
+    height: 100%;
+    padding: 5px;
+  }
+</style>
+<div class="flex-cont">
+  <div class="boxx"><img class="box_img" style="height: 700px;" src="../assets/5_AOU17hZ.2e16d0ba.fill-635x425.jpg">
+  </div>
+  <div class="boxx box_img_div">
+    <div *ngIf="ShowForm">
+      <form [formGroup]="info">
+        <div class="form-group m-4">
+          <div class="row">
+            <h1>Enroll Today!!!!</h1>
+          </div>
+          <div class="row">
+            <label class="form-label col-md-2 ">Name</label>
+            <input class="col-md-4 form-control" formControlName="Name" type="text">
+            <div *ngIf="nameerror">
+              Please enter a valid name
+            </div>
+          </div>
+          <div class="row">
+            <label class="form-label col-md-2">Age</label>
+            <input class="col-md-4 form-control" formControlName="Age" type="text">
+            <div *ngIf="ageerror">
+              Please enter a valid age
+            </div>
+          </div>
+          <div class="row">
+            <label class="form-label col-md-2">Mobile</label>
+            <input class="col-md-4 form-control" formControlName="Mobile" type="text">
+            <div *ngIf="mobileerror">
+              Please enter a valid Number
+            </div>
+          </div>
+          <div class="row">
+            <label class="form-label col-md-2">Email</label>
+            <input class="col-md-4 form-control" formControlName="Email" type="text">
+            <div *ngIf="emailerror">
+              Please enter a valid email
+            </div>
+          </div>
+          <div class="text-center m-4">
+            <button type="button" (click)="FormSubmit()" class="btn btn-success">Submit</button>
+          </div>
+        </div>
+      </form>
+      <div class="col-auto m-4" *ngIf="Submit">
+        <div class="m-4">
+          <img [src]="image">
+        </div>
+        <div class="col-auto m-4" *ngIf="Submit">
+          <label>Select three tags that best describe the above video</label>
+        </div>
+        <div>
+          <form (ngSubmit)="Capt()">
+            <mat-form-field>
+              <mat-label>Tags</mat-label>
+              <mat-select class="example-form" [formControl]="toppings" multiple>
+                <mat-option *ngFor="let topping of options" [value]="topping">{{topping}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <div class="row">
+              <button class="btn btn-success" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="SuccessCaptach">
+      <h2>Congratulations!</h2>
+      <h3>You have been enrolled</h3>
+    </div>
+    <div *ngIf="FailurCaptach">
+      <h2>For security reasons, we could not enroll you, Please try again in sometime</h2>
+    </div>
+
+    <!-- <app-upload-images></app-upload-images> -->
+  </div>
+</div>
